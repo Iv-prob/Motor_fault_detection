@@ -4,8 +4,7 @@ import pandas as pd
 # 1. Загружаем полный CSV файл (10 000 строк)
 df = pd.read_csv("ai4i2020.csv")
 
-# ПРИНУДИТЕЛЬНО И ЧЕТКО ПЕРЕИМЕНОВЫВАЕМ ТОЛЬКО НУЖНЫЕ НАМ КОЛОНКИ
-# Это защитит нас от любых неожиданных названий в исходном файле
+# переименовываем колонки
 rename_dict = {
     'Air temperature [K]': 'Air_temperature',
     'Process temperature [K]': 'Process_temperature',
@@ -22,7 +21,7 @@ conn = sqlite3.connect(':memory:')
 # Переносим DataFrame в таблицу factory_telemetry
 df.to_sql('factory_telemetry', conn, index=False, if_exists='replace')
 
-# 3. НАШ НАДЕЖНЫЙ SQL-ЗАПРОС
+# 3. SQL-запрос
 sql_query = """
 SELECT 
     Machine_failure, 
